@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.serviceMarket.mapper.HelperAcceptMapper" >
+  <resultMap id="BaseResultMap" type="com.serviceMarket.pojo.HelperAccept" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="helper_id" property="helperId" jdbcType="INTEGER" />
+    <result column="helper_table_id" property="helperTableId" jdbcType="INTEGER" />
+    <result column="dead_time" property="deadTime" jdbcType="TIMESTAMP" />
+    <result column="accept_time" property="acceptTime" jdbcType="TIMESTAMP" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, helper_id, helper_table_id, dead_time, accept_time, phone
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.serviceMarket.pojo.HelperAcceptExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from helper_accept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from helper_accept
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from helper_accept
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.serviceMarket.pojo.HelperAcceptExample" >
+    delete from helper_accept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.serviceMarket.pojo.HelperAccept" >
+    insert into helper_accept (id, helper_id, helper_table_id, 
+      dead_time, accept_time, phone
+      )
+    values (#{id,jdbcType=INTEGER}, #{helperId,jdbcType=INTEGER}, #{helperTableId,jdbcType=INTEGER}, 
+      #{deadTime,jdbcType=TIMESTAMP}, #{acceptTime,jdbcType=TIMESTAMP}, #{phone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.serviceMarket.pojo.HelperAccept" >
+    insert into helper_accept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="helperId != null" >
+        helper_id,
+      </if>
+      <if test="helperTableId != null" >
+        helper_table_id,
+      </if>
+      <if test="deadTime != null" >
+        dead_time,
+      </if>
+      <if test="acceptTime != null" >
+        accept_time,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="helperId != null" >
+        #{helperId,jdbcType=INTEGER},
+      </if>
+      <if test="helperTableId != null" >
+        #{helperTableId,jdbcType=INTEGER},
+      </if>
+      <if test="deadTime != null" >
+        #{deadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptTime != null" >
+        #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.serviceMarket.pojo.HelperAcceptExample" resultType="java.lang.Integer" >
+    select count(*) from helper_accept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update helper_accept
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.helperId != null" >
+        helper_id = #{record.helperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.helperTableId != null" >
+        helper_table_id = #{record.helperTableId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deadTime != null" >
+        dead_time = #{record.deadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.acceptTime != null" >
+        accept_time = #{record.acceptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update helper_accept
+    set id = #{record.id,jdbcType=INTEGER},
+      helper_id = #{record.helperId,jdbcType=INTEGER},
+      helper_table_id = #{record.helperTableId,jdbcType=INTEGER},
+      dead_time = #{record.deadTime,jdbcType=TIMESTAMP},
+      accept_time = #{record.acceptTime,jdbcType=TIMESTAMP},
+      phone = #{record.phone,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.serviceMarket.pojo.HelperAccept" >
+    update helper_accept
+    <set >
+      <if test="helperId != null" >
+        helper_id = #{helperId,jdbcType=INTEGER},
+      </if>
+      <if test="helperTableId != null" >
+        helper_table_id = #{helperTableId,jdbcType=INTEGER},
+      </if>
+      <if test="deadTime != null" >
+        dead_time = #{deadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptTime != null" >
+        accept_time = #{acceptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.serviceMarket.pojo.HelperAccept" >
+    update helper_accept
+    set helper_id = #{helperId,jdbcType=INTEGER},
+      helper_table_id = #{helperTableId,jdbcType=INTEGER},
+      dead_time = #{deadTime,jdbcType=TIMESTAMP},
+      accept_time = #{acceptTime,jdbcType=TIMESTAMP},
+      phone = #{phone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

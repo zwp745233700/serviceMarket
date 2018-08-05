@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.serviceMarket</groupId>
+    <artifactId>serviceMarket-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <groupId>com.serviceMarket</groupId>
+  <artifactId>serviceMarket-manager</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <modules>
+  	<module>serviceMarket-manager-pojo</module>
+  	<module>serviceMarket-manager-mapper</module>
+  	<module>serviceMarket-manager-service</module>
+  	<module>serviceMarket-manager-web</module>
+  </modules>
+  
+  <dependencies>
+		<dependency>
+			<groupId>com.serviceMarket</groupId>
+			<artifactId>serviceMarket-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<!-- 配置Tomcat插件 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<port>8080</port>
+					<url>http://119.29.194.197:8080/manager/text</url>
+						<username>admin</username>
+						<password>admin</password>
+						<path>/serviceMarket-manager-web</path>
+						<update>true</update>
+				</configuration>
+			</plugin>
+			
+			<!-- war插件-->
+<!-- 			<plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-war-plugin</artifactId>
+	                <configuration>
+	                    <webResources>
+	                        <resource>
+	                            WEB-INF文件地址，idea是web,Myeclipse是webRoot
+	                            <directory>\src\main\webapp</directory>
+	                        </resource>
+	                    </webResources>
+	                </configuration>
+	           </plugin> -->
+		</plugins>
+	</build>
+  
+</project>
